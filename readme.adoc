@@ -1,0 +1,1 @@
+An experimental code generator for https://github.com/com-lihaoyi/scalasql[ScalaSql] table definitions from a JDBC database connection.

@@ -1,0 +1,4 @@
+extends: [build.ScalaTests, TestModule.Utest]
+mvnDeps:
+- com.lihaoyi::utest:0.9.1
+- org.postgresql:postgresql:42.7.4
