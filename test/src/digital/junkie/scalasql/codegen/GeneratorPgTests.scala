@@ -32,10 +32,11 @@ object GeneratorPgTests extends TestSuite {
 
         val generator = Generator.impl()
 
-        val code = generator.generate(conn, "test_schema", "com.example") match {
-          case Right(source) => source.syntax
-          case Left(err)     => throw new RuntimeException(err)
-        }
+        val code =
+          generator.generate(conn, "test_schema", "com.example") match {
+            case Right(source) => source.syntax
+            case Left(err)     => throw new RuntimeException(err)
+          }
 
         assert(code.contains("package com.example"))
         assert(code.contains("case class TestTable(id: Int)"))

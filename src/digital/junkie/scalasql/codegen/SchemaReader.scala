@@ -91,7 +91,7 @@ object SchemaReader {
       val buf = List.newBuilder[ColumnInfo]
       while (rs.next()) {
         val name = rs.getString("name")
-        val scalaType = sqliteTypeToScala(rs.getString("type"))
+        val scalaType = readColumnType(rs.getString("type"))
         val notNull = rs.getInt("notnull") == 1
         val isPk = rs.getInt("pk") > 0
         buf += ColumnInfo(name, scalaType, nullable = !notNull && !isPk)
@@ -101,7 +101,7 @@ object SchemaReader {
       buf.result()
     }
 
-    private def sqliteTypeToScala(typeName: String): String = {
+    def readColumnType(typeName: String): String = {
       val t = typeName.toUpperCase.trim
       if (t.contains("BIGINT")) "Long"
       else if (t.contains("INT")) "Int"
